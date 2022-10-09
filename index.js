@@ -14,14 +14,14 @@ const playerImage = new Image()
 playerImage.src = './src/assets/images/playerDown.png'
 
 image.onload = () => {
-  c.drawImage(image, -785, -650)
+  c.drawImage(image, -750, -650) // -785, -650
   c.drawImage(
     playerImage,
     0,
     0,
     playerImage.width / 4,
     playerImage.height,
-    canvas.width / 2 - playerImage.width / 2,
+    canvas.width / 2 - (playerImage.width / 4) / 2,
     canvas.height / 2 - playerImage.height / 2,
     playerImage.width / 4,
     playerImage.height,
