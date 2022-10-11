@@ -8,10 +8,10 @@ c.fillStyle = 'white'
 c.fillRect(0, 0, canvas.width, canvas.height)
 
 const image = new Image()
-image.src = './src/assets/images/Pellet Town.png'
+image.src = './assets/images/Pellet Town.png'
 
 const playerImage = new Image()
-playerImage.src = './src/assets/images/playerDown.png'
+playerImage.src = './assets/images/playerDown.png'
 
 class Sprite {
   constructor({
