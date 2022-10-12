@@ -23,7 +23,11 @@ class Boundary {
 }
 
 const boundaries = []
-
+collisionsMap.forEach(row => {
+  row.forEach(symbol => {
+    console.log(symbol)
+  })
+})
 
 const image = new Image()
 image.src = './assets/images/Pellet Town.png'
