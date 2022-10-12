@@ -54,6 +54,10 @@ class Sprite {
     this.position = position
     this.image = image
     this.frames = frames
+    this.image.onload = () => {
+      this.width = this.image.width / this.frames.max
+      this.height = this.image.height
+    }
   }
 
   draw() {
@@ -103,25 +107,32 @@ const keys = {
   }
 }
 
-const testBoundary = new Boundary({
-  position: {
-    x: 400,
-    y: 400
-  }
-})
+const movables = [background]
 
-const movables = [background, testBoundary]
+function rectangularCollision({ rect1, rect2 }) {
+  return (
+    rect1.position.x + rect1.width >= rect2.position.x &&
+    rect1.position.x <= rect2.position.x + rect2.width &&
+    rect1.position.y <= rect2.position.y + rect2.height &&
+    rect1.position.y + rect1.height >= rect2.position.y
+  )
+}
 
 function animate() {
   background.draw()
   // boundaries.forEach(boundary => {
   //   boundary.draw()
   // })
-  testBoundary.draw()
   player.draw()
 
 
-  // if (player.position.x + player.width) {}
+  if (rectangularCollision({
+    rect1: player,
+    rect2: testBoundary
+  })) {
+
+    console.log('cool')
+  }
 
   if (keys.w.pressed && lastKey === 'w') movables.forEach(movable => movable.position.y += 3)
   else if (keys.a.pressed && lastKey === 'a') movables.forEach(movable => movable.position.x += 3)
