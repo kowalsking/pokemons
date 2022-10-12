@@ -20,7 +20,7 @@ class Boundary {
   }
 
   draw() {
-    c.fillStyle = 'red'
+    c.fillStyle = 'rgba(255, 0, 0, 0.0)'
     c.fillRect(this.position.x, this.position.y, this.width, this.height)
   }
 }
@@ -144,12 +144,54 @@ function animate() {
     movables.forEach(movable => movable.position.y += 3)
   }
   else if (keys.a.pressed && lastKey === 'a') {
+    for (let i = 0; i < boundaries.length; i++) {
+      const boundary = boundaries[i]
+      if (rectangularCollision({
+        rect1: player,
+        rect2: {...boundary, position: {
+          x: boundary.position.x + 3,
+          y: boundary.position.y
+        }}
+      })) {
+        moving = false
+        break
+      }
+    }
+    if (moving)
     movables.forEach(movable => movable.position.x += 3)
   }
   else if (keys.s.pressed && lastKey === 's') {
+    for (let i = 0; i < boundaries.length; i++) {
+      const boundary = boundaries[i]
+      if (rectangularCollision({
+        rect1: player,
+        rect2: {...boundary, position: {
+          x: boundary.position.x,
+          y: boundary.position.y - 3
+        }}
+      })) {
+        moving = false
+        break
+      }
+    }
+    if (moving)
     movables.forEach(movable => movable.position.y -= 3)
   }
   else if (keys.d.pressed && lastKey === 'd') {
+    for (let i = 0; i < boundaries.length; i++) {
+      const boundary = boundaries[i]
+      if (rectangularCollision({
+        rect1: player,
+        rect2: {...boundary, position: {
+          x: boundary.position.x - 3,
+          y: boundary.position.y
+        }}
+      })) {
+        moving = false
+        break
+      }
+    }
+    if (moving)
     movables.forEach(movable => movable.position.x -= 3)
   }
   
