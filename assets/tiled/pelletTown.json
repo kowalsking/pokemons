@@ -786,11 +786,11 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"assets\/tiled\/pokemonStyleGameTileset.tsx"
+         "source":"pokemonStyleGameTileset.tsx"
         }, 
         {
          "firstgid":1025,
-         "source":"assets\/tiled\/collisionTileset.tsx"
+         "source":"collisionTileset.tsx"
         }],
  "tilewidth":12,
  "type":"map",
