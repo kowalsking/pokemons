@@ -107,7 +107,7 @@ const keys = {
   }
 }
 
-const movables = [background]
+const movables = [background, ...boundaries]
 
 function rectangularCollision({ rect1, rect2 }) {
   return (
@@ -120,24 +120,38 @@ function rectangularCollision({ rect1, rect2 }) {
 
 function animate() {
   background.draw()
-  // boundaries.forEach(boundary => {
-  //   boundary.draw()
-  // })
+  boundaries.forEach(boundary => {
+    boundary.draw()
+  })
   player.draw()
 
-
-  if (rectangularCollision({
-    rect1: player,
-    rect2: testBoundary
-  })) {
-
-    console.log('cool')
+  let moving = true
+  if (keys.w.pressed && lastKey === 'w') {
+    for (let i = 0; i < boundaries.length; i++) {
+      const boundary = boundaries[i]
+      if (rectangularCollision({
+        rect1: player,
+        rect2: {...boundary, position: {
+          x: boundary.position.x,
+          y: boundary.position.y + 3
+        }}
+      })) {
+        moving = false
+        break
+      }
+    }
+    if (moving)
+    movables.forEach(movable => movable.position.y += 3)
   }
-
-  if (keys.w.pressed && lastKey === 'w') movables.forEach(movable => movable.position.y += 3)
-  else if (keys.a.pressed && lastKey === 'a') movables.forEach(movable => movable.position.x += 3)
-  else if (keys.s.pressed && lastKey === 's') movables.forEach(movable => movable.position.y -= 3)
-  else if (keys.d.pressed && lastKey === 'd') movables.forEach(movable => movable.position.x -= 3)
+  else if (keys.a.pressed && lastKey === 'a') {
+    movables.forEach(movable => movable.position.x += 3)
+  }
+  else if (keys.s.pressed && lastKey === 's') {
+    movables.forEach(movable => movable.position.y -= 3)
+  }
+  else if (keys.d.pressed && lastKey === 'd') {
+    movables.forEach(movable => movable.position.x -= 3)
+  }
   
 
   requestAnimationFrame(animate)
