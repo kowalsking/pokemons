@@ -26,17 +26,17 @@ class Boundary {
 }
 
 const boundaries = []
+const offset = { x: -735, y: -650 }
+
 collisionsMap.forEach((row, i) => {
   row.forEach((symbol, j) => {
     if (symbol === 1025)
     boundaries.push(new Boundary({ position: {
-      x: j * Boundary.width,
-      y: i * Boundary.height
+      x: j * Boundary.width + offset.x,
+      y: i * Boundary.height + offset.y
     }}))
   })
 })
-
-console.log(boundaries)
 
 const image = new Image()
 image.src = './assets/images/Pellet Town.png'
@@ -48,21 +48,45 @@ class Sprite {
   constructor({
     position,
     velocity,
-    image
+    image,
+    frames = { max: 1 }
   }) {
     this.position = position
     this.image = image
+    this.frames = frames
   }
 
   draw() {
-    c.drawImage(this.image, this.position.x, this.position.y) // -785, -650
+    c.drawImage(
+      this.image,
+      0,
+      0,
+      this.image.width / this.frames.max,
+      this.image.height,
+      this.position.x,
+      this.position.y,
+      this.image.width / this.frames.max,
+      this.image.height
+    )
   }
 }
 
+// canvas.width / 2 - (this.image.width / 4) / 2,
+// canvas.height / 2 - this.image.height / 2,
+
+const player = new Sprite({
+  position: {
+    x: canvas.width / 2 - (playerImage.width / 4) / 2,
+    y: canvas.height / 2 - playerImage.height / 2
+  },
+  image: playerImage,
+  frames: { max: 4 }
+})
+
 const background = new Sprite({
   position: {
-    x: -750,
-    y: -650
+    x: offset.x,
+    y: offset.y
   },
   image
 })
@@ -82,25 +106,30 @@ const keys = {
   }
 }
 
+const testBoundary = new Boundary({
+  position: {
+    x: 400,
+    y: 400
+  }
+})
+
+const movables = [background, testBoundary]
+
 function animate() {
   background.draw()
+  // boundaries.forEach(boundary => {
+  //   boundary.draw()
+  // })
+  testBoundary.draw()
+  player.draw()
 
-  c.drawImage(
-    playerImage,
-    0,
-    0,
-    playerImage.width / 4,
-    playerImage.height,
-    canvas.width / 2 - (playerImage.width / 4) / 2,
-    canvas.height / 2 - playerImage.height / 2,
-    playerImage.width / 4,
-    playerImage.height,
-  )
 
-  if (keys.w.pressed && lastKey === 'w') background.position.y += 3
-  else if (keys.a.pressed && lastKey === 'a') background.position.x += 3
-  else if (keys.s.pressed && lastKey === 's') background.position.y -= 3
-  else if (keys.d.pressed && lastKey === 'd') background.position.x -= 3
+  // if (player.position.x + player.width) {}
+
+  if (keys.w.pressed && lastKey === 'w') movables.forEach(movable => movable.position.y += 3)
+  else if (keys.a.pressed && lastKey === 'a') movables.forEach(movable => movable.position.x += 3)
+  else if (keys.s.pressed && lastKey === 's') movables.forEach(movable => movable.position.y -= 3)
+  else if (keys.d.pressed && lastKey === 'd') movables.forEach(movable => movable.position.x -= 3)
   
 
   requestAnimationFrame(animate)
