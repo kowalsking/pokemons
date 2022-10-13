@@ -32,16 +32,31 @@ image.src = './assets/images/Pellet Town.png'
 const foregroundImage = new Image()
 foregroundImage.src = './assets/images/foregroundImage.png'
 
-const playerImage = new Image()
-playerImage.src = './assets/images/playerDown.png'
+const playerDownImage = new Image()
+playerDownImage.src = './assets/images/playerDown.png'
+
+const playerUpImage = new Image()
+playerUpImage.src = './assets/images/playerUp.png'
+
+const playerLeftImage = new Image()
+playerLeftImage.src = './assets/images/playerLeft.png'
+
+const playerRightImage = new Image()
+playerRightImage.src = './assets/images/playerRight.png'
 
 const player = new Sprite({
   position: {
-    x: canvas.width / 2 - playerImage.width / 4 / 2,
-    y: canvas.height / 2 - playerImage.height / 2,
+    x: canvas.width / 2 - 192 / 4 / 2,
+    y: canvas.height / 2 - 48 / 2,
   },
-  image: playerImage,
+  image: playerDownImage,
   frames: { max: 4 },
+  sprites: {
+    up: playerUpImage,
+    left: playerLeftImage,
+    right: playerRightImage,
+    down: playerDownImage,
+  },
 })
 
 const background = new Sprite({
@@ -98,6 +113,7 @@ function animate() {
   player.moving = false
   if (keys.w.pressed && lastKey === 'w') {
     player.moving = true
+    player.image = player.sprites.up
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i]
       if (
@@ -119,6 +135,7 @@ function animate() {
     if (moving) movables.forEach((movable) => (movable.position.y += 3))
   } else if (keys.a.pressed && lastKey === 'a') {
     player.moving = true
+    player.image = player.sprites.left
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i]
       if (
@@ -140,6 +157,8 @@ function animate() {
     if (moving) movables.forEach((movable) => (movable.position.x += 3))
   } else if (keys.s.pressed && lastKey === 's') {
     player.moving = true
+    player.image = player.sprites.down
+
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i]
       if (
@@ -161,6 +180,8 @@ function animate() {
     if (moving) movables.forEach((movable) => (movable.position.y -= 3))
   } else if (keys.d.pressed && lastKey === 'd') {
     player.moving = true
+    player.image = player.sprites.right
+
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i]
       if (
