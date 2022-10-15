@@ -13,18 +13,24 @@
   </style>
 </head>
 <body>
-  <div style ="display: inline-block;">
-    <div style="
+  <div style ="
+    display: inline-block;
+    position: relative;
+  ">
+    <div id="overlappingDiv" style="
       background-color: black;
       position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
       left: 0;
+      pointer-events: none;
+      opacity: 0;
     "></div>
     <canvas></canvas>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js" integrity="sha512-gmwBmiTVER57N3jYS3LinA9eb8aHrJua5iQD7yqYCKa5x6Jjc7VDVaEA0je0Lu0bP9j7tEjV3+1qUm6loO99Kw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="data/battleZones.js"></script>
   <script src="data/collisions.js"></script>
   <script src="./classes.js"></script>

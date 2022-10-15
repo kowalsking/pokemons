@@ -127,6 +127,7 @@ const battle = {
 }
 
 function animate() {
+  const animationId = window.requestAnimationFrame(animate)
   background.draw()
   boundaries.forEach((boundary) => {
     boundary.draw()
@@ -165,8 +166,24 @@ function animate() {
         overlappingArea > (player.width * player.height) / 2 &&
         Math.random() < 0.01
       ) {
-        console.log('activate battle')
         battle.initiated = true
+
+        // deactivate current animation loop
+        window.cancelAnimationFrame(animationId)
+
+        gsap.to('#overlappingDiv', {
+          opacity: 1,
+          repeat: 3,
+          yoyo: true,
+          duration: 0.4,
+          onComplete() {
+            gsap.to('#overlappingDiv', {
+              opacity: 1,
+              duration: 0.4,
+            })
+            // actiovate a new animation loop
+          },
+        })
         break
       }
     }
@@ -264,8 +281,6 @@ function animate() {
     }
     if (moving) movables.forEach((movable) => (movable.position.x -= 3))
   }
-
-  requestAnimationFrame(animate)
 }
 animate()
 
