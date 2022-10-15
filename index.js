@@ -180,10 +180,15 @@ function animate() {
             gsap.to('#overlappingDiv', {
               opacity: 1,
               duration: 0.4,
+              onComplete() {
+                // activate a new animation loop
+                animateBattle()
+                gsap.to('#overlappingDiv', {
+                  opacity: 0,
+                  duration: 0.4,
+                })
+              },
             })
-            // actiovate a new animation loop
-
-            animateBattle()
           },
         })
         break
@@ -284,11 +289,24 @@ function animate() {
     if (moving) movables.forEach((movable) => (movable.position.x -= 3))
   }
 }
-animate()
+// animate()
+
+const battleBackgroundImage = new Image()
+battleBackgroundImage.src = './assets/images/battleBackground.png'
+const battleBackground = new Sprite({
+  image: battleBackgroundImage,
+  position: {
+    x: 0,
+    y: 0,
+  },
+})
 
 function animateBattle() {
   window.requestAnimationFrame(animateBattle)
+  battleBackground.draw()
 }
+
+animateBattle()
 
 let lastKey = ''
 
