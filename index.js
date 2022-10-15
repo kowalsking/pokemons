@@ -301,6 +301,16 @@ const battleBackground = new Sprite({
   },
 })
 
+const battleBackgroundImage = new Image()
+battleBackgroundImage.src = './assets/images/battleBackground.png'
+const draggle = new Sprite({
+  position: {
+    x: 100,
+    y: 400,
+  },
+  image: 
+})
+
 function animateBattle() {
   window.requestAnimationFrame(animateBattle)
   battleBackground.draw()
