@@ -182,6 +182,8 @@ function animate() {
               duration: 0.4,
             })
             // actiovate a new animation loop
+
+            animateBattle()
           },
         })
         break
@@ -283,6 +285,10 @@ function animate() {
   }
 }
 animate()
+
+function animateBattle() {
+  window.requestAnimationFrame(animateBattle)
+}
 
 let lastKey = ''
 
