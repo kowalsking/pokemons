@@ -71,7 +71,7 @@ const player = new Sprite({
     y: canvas.height / 2 - 48 / 2,
   },
   image: playerDownImage,
-  frames: { max: 4 },
+  frames: { max: 4, hold: 10 },
   sprites: {
     up: playerUpImage,
     left: playerLeftImage,
@@ -311,6 +311,7 @@ const draggle = new Sprite({
   image: draggleImage,
   frames: {
     max: 4,
+    hold: 30,
   },
   animate: true,
 })
