@@ -139,7 +139,7 @@ function animate() {
   foreground.draw()
 
   let moving = true
-  player.moving = false
+  player.animate = false
 
   if (battle.initiated) return
 
@@ -197,7 +197,7 @@ function animate() {
   }
 
   if (keys.w.pressed && lastKey === 'w') {
-    player.moving = true
+    player.animate = true
     player.image = player.sprites.up
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i]
@@ -220,7 +220,7 @@ function animate() {
 
     if (moving) movables.forEach((movable) => (movable.position.y += 3))
   } else if (keys.a.pressed && lastKey === 'a') {
-    player.moving = true
+    player.animate = true
     player.image = player.sprites.left
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i]
@@ -242,7 +242,7 @@ function animate() {
     }
     if (moving) movables.forEach((movable) => (movable.position.x += 3))
   } else if (keys.s.pressed && lastKey === 's') {
-    player.moving = true
+    player.animate = true
     player.image = player.sprites.down
 
     for (let i = 0; i < boundaries.length; i++) {
@@ -265,7 +265,7 @@ function animate() {
     }
     if (moving) movables.forEach((movable) => (movable.position.y -= 3))
   } else if (keys.d.pressed && lastKey === 'd') {
-    player.moving = true
+    player.animate = true
     player.image = player.sprites.right
 
     for (let i = 0; i < boundaries.length; i++) {
@@ -301,19 +301,24 @@ const battleBackground = new Sprite({
   },
 })
 
-const battleBackgroundImage = new Image()
-battleBackgroundImage.src = './assets/images/battleBackground.png'
+const draggleImage = new Image()
+draggleImage.src = './assets/images/draggleSprite.png'
 const draggle = new Sprite({
   position: {
-    x: 100,
-    y: 400,
+    x: 800,
+    y: 100,
   },
-  image: 
+  image: draggleImage,
+  frames: {
+    max: 4,
+  },
+  animate: true,
 })
 
 function animateBattle() {
   window.requestAnimationFrame(animateBattle)
   battleBackground.draw()
+  draggle.draw()
 }
 
 animateBattle()
