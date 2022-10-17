@@ -10,6 +10,9 @@
       body {
         background-color: black;
       }
+      h1 {
+        margin: 0;
+      }
     </style>
   </head>
   <body>
@@ -38,15 +41,24 @@
           right: 0;
           left: 0;
           border-top: 4px black solid;
+          display: flex;
         "
       >
-        <div>
+        <div style="width: 66.66%">
           <button>Attack</button>
           <button>Attack2</button>
           <button>Attack3</button>
           <button>Attack4</button>
         </div>
-        <div>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 33.33%;
+            border-left: 4px black solid;
+          "
+        >
           <h1>Attack type</h1>
         </div>
       </div>
