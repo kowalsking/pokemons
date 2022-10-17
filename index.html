@@ -10,8 +10,18 @@
       body {
         background-color: black;
       }
+
       h1 {
         margin: 0;
+      }
+
+      button {
+        border: 0;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #ddd;
       }
     </style>
   </head>
@@ -44,7 +54,13 @@
           display: flex;
         "
       >
-        <div style="width: 66.66%">
+        <div
+          style="
+            width: 66.66%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+          "
+        >
           <button>Attack</button>
           <button>Attack2</button>
           <button>Attack3</button>
