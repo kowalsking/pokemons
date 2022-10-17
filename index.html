@@ -1,49 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JS | Pokémon</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS | Pokémon</title>
 
-  <style>
-    body {
-      background-color: black;
-    }
-  </style>
-</head>
-<body>
-  <div style ="
-    display: inline-block;
-    position: relative;
-  ">
-    <div id="overlappingDiv" style="
-      background-color: black;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      pointer-events: none;
-      opacity: 0;
-    "></div>
-    <canvas></canvas>
+    <style>
+      body {
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="display: inline-block; position: relative">
+      <div
+        id="overlappingDiv"
+        style="
+          background-color: black;
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          pointer-events: none;
+          opacity: 0;
+        "
+      ></div>
+      <canvas></canvas>
 
-    <div style="
-      background-color: white;
-      width: 200px;
-      height: 200px;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-    "></div>
-  </div>
+      <div
+        style="
+          background-color: white;
+          height: 140px;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          left: 0;
+          border-top: 4px black solid;
+        "
+      >
+        <div>
+          <button>Attack</button>
+          <button>Attack2</button>
+          <button>Attack3</button>
+          <button>Attack4</button>
+        </div>
+        <div>
+          <h1>Attack type</h1>
+        </div>
+      </div>
+    </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js" integrity="sha512-gmwBmiTVER57N3jYS3LinA9eb8aHrJua5iQD7yqYCKa5x6Jjc7VDVaEA0je0Lu0bP9j7tEjV3+1qUm6loO99Kw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="data/battleZones.js"></script>
-  <script src="data/collisions.js"></script>
-  <script src="./classes.js"></script>
-  <script src="./index.js"></script>
-</body>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"
+      integrity="sha512-gmwBmiTVER57N3jYS3LinA9eb8aHrJua5iQD7yqYCKa5x6Jjc7VDVaEA0je0Lu0bP9j7tEjV3+1qUm6loO99Kw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="data/battleZones.js"></script>
+    <script src="data/collisions.js"></script>
+    <script src="./classes.js"></script>
+    <script src="./index.js"></script>
+  </body>
 </html>
