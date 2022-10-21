@@ -289,6 +289,7 @@ function animate() {
     if (moving) movables.forEach((movable) => (movable.position.x -= 3))
   }
 }
+
 // animate()
 
 const battleBackgroundImage = new Image()
