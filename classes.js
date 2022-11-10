@@ -70,7 +70,6 @@ class Sprite {
         duration: 0.1,
         onComplete: () => {
           // Enemy actually gets hit
-
           gsap.to(healthBar, {
             width: this.health + '%'
           })
@@ -91,7 +90,7 @@ class Sprite {
         }
       })
       .to(this.position, {
-        x: this.position.x,
+        x: this.position.x
       })
   }
 }
