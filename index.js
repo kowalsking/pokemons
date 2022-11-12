@@ -346,13 +346,9 @@ animateBattle()
 const buttons = document.querySelectorAll('button')
 buttons.forEach((button) => {
   button.addEventListener('click', (e) => {
-    e.currentTarget.innerHTML
+    const type = e.currentTarget.innerHTML
     emby.attack({
-      attack: {
-        name: 'Tackle',
-        damage: 10,
-        type: 'Normal',
-      },
+      attack: attacks[type],
       recipient: draggle
     })
   })
