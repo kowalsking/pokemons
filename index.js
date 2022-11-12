@@ -333,11 +333,17 @@ const emby = new Sprite({
   animate: true,
 })
 
+const rendererSprites = []
+
 function animateBattle() {
   window.requestAnimationFrame(animateBattle)
   battleBackground.draw()
   draggle.draw()
   emby.draw()
+
+  rendererSprites.forEach((sprite) => {
+    sprite.draw()
+  })
 }
 
 animateBattle()
@@ -349,7 +355,8 @@ buttons.forEach((button) => {
     const type = e.currentTarget.innerHTML
     emby.attack({
       attack: attacks[type],
-      recipient: draggle
+      recipient: draggle,
+      rendererSprites
     })
   })
 })

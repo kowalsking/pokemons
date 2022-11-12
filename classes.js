@@ -51,31 +51,64 @@ class Sprite {
     }
   }
 
-  attack({ attack, recipient }) {
+  attack({ attack, recipient, rendererSprites }) {
+    let healthBar = '#enemyHealthBar'
+    if (this.isEnemy) healthBar = '#playerHealthBar'
+    
+    this.health -= attack.damage
+
     switch (attack.name) {
       case 'Fireball':
         const fireballImage = new Image()
-        fireballImage.src = './img/fireball.png'
+        fireballImage.src = './assets/images/fireball.png'
 
         const fireball = new Sprite({
           position: {
             x: this.position.x,
             y: this.position.y
           },
-          image: fireballImage
+          image: fireballImage,
+          frames: {
+            max: 4,
+            hold: 10
+          },
+          animate: true
+        })
+
+        rendererSprites.push(fireball)
+
+        gsap.to(fireball.position, {
+          x: recipient.position.x,
+          y: recipient.position.y,
+          onComplete: () => {
+            // Enemy actually gets hit
+            gsap.to(healthBar, {
+              width: this.health + '%',
+            })
+
+            gsap.to(recipient.position, {
+              x: recipient.position.x + 10,
+              yoyo: true,
+              repeat: 5,
+              duration: 0.08,
+            })
+
+            gsap.to(recipient, {
+              opacity: 0,
+              repeat: 5,
+              yoyo: true,
+              duration: 0.08,
+            })
+            rendererSprites.pop()
+          }
         })
 
         break
       case 'Tackle':
         const tl = gsap.timeline()
 
-        this.health -= attack.damage
-
         let movementDistance = 20
         if (this.isEnemy) movementDistance = -20
-
-        let healthBar = '#enemyHealthBar'
-        if (this.isEnemy) healthBar = '#playerHealthBar'
 
         tl.to(this.position, {
           x: this.position.x - movementDistance,
