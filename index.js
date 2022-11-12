@@ -342,9 +342,11 @@ function animateBattle() {
 
 animateBattle()
 
+// event listeners for our buttons (attack and fireball)
 const buttons = document.querySelectorAll('button')
 buttons.forEach((button) => {
-  button.addEventListener('click', () => {
+  button.addEventListener('click', (e) => {
+    e.currentTarget.innerHTML
     emby.attack({
       attack: {
         name: 'Tackle',
