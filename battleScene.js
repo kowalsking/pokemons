@@ -55,6 +55,8 @@ function animateBattle() {
 
 animateBattle()
 
+const queue = []
+
 // event listeners for our buttons (attack and fireball)
 const buttons = document.querySelectorAll('button')
 buttons.forEach((button) => {
@@ -65,5 +67,20 @@ buttons.forEach((button) => {
       recipient: draggle,
       rendererSprites
     })
+
+    queue.push(() => {
+      draggle.attack({
+        attack: attacks.Tackle,
+        recipient: emby,
+        rendererSprites
+      })
+    })
   })
+})
+
+document.querySelector('#dialogueBox').addEventListener('click', (e) => {
+  if (queue.length > 0) {
+    queue[0]()
+    queue.shift()
+  } else e.target.style.display = 'none'
 })
