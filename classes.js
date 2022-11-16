@@ -8,7 +8,7 @@ class Sprite {
     animate = false,
     isEnemy = false,
     rotation = 0,
-    name
+    name,
   }) {
     this.position = position
     this.image = image
@@ -29,9 +29,15 @@ class Sprite {
 
   draw() {
     c.save()
-    c.translate(this.position.x + this.width / 2, this.position.y + this.height / 2)
+    c.translate(
+      this.position.x + this.width / 2,
+      this.position.y + this.height / 2
+    )
     c.rotate(this.rotation)
-    c.translate(-this.position.x - this.width / 2, -this.position.y - this.height / 2)
+    c.translate(
+      -this.position.x - this.width / 2,
+      -this.position.y - this.height / 2
+    )
     c.globalAlpha = this.opacity
     c.drawImage(
       this.image,
@@ -57,10 +63,14 @@ class Sprite {
       else this.frames.val = 0
     }
   }
+}
 
+class Monster extends Sprite {
   attack({ attack, recipient, rendererSprites }) {
     document.querySelector('#dialogueBox').style.display = 'block'
-    document.querySelector('#dialogueBox').innerHTML = `${this.name} used ${attack.name}`
+    document.querySelector(
+      '#dialogueBox'
+    ).innerHTML = `${this.name} used ${attack.name}`
     let healthBar = '#enemyHealthBar'
     if (this.isEnemy) healthBar = '#playerHealthBar'
 
@@ -77,15 +87,15 @@ class Sprite {
         const fireball = new Sprite({
           position: {
             x: this.position.x,
-            y: this.position.y
+            y: this.position.y,
           },
           image: fireballImage,
           frames: {
             max: 4,
-            hold: 10
+            hold: 10,
           },
           animate: true,
-          rotation
+          rotation,
         })
 
         rendererSprites.splice(1, 0, fireball)
@@ -113,7 +123,7 @@ class Sprite {
               duration: 0.08,
             })
             rendererSprites.splice(1, 1)
-          }
+          },
         })
 
         break
