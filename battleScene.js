@@ -10,8 +10,8 @@ const battleBackground = new Sprite({
 })
 
 
-const draggle = new Sprite(monsters.Draggle)
-const emby = new Sprite(monsters.Emby)
+const draggle = new Monster(monsters.Draggle)
+const emby = new Monster(monsters.Emby)
 
 const rendererSprites = [draggle, emby]
 const button = document.createElement('button')
