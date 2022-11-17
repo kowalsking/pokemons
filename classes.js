@@ -71,6 +71,7 @@ class Monster extends Sprite {
     rotation = 0,
     isEnemy = false,
     name,
+    attacks
   }) {
     super({
       position,
@@ -84,6 +85,7 @@ class Monster extends Sprite {
     this.health = 100
     this.isEnemy = isEnemy
     this.name = name
+    this.attacks = attacks
   }
 
   attack({ attack, recipient, rendererSprites }) {
