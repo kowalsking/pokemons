@@ -6,9 +6,7 @@ class Sprite {
     frames = { max: 1, hold: 10 },
     sprites,
     animate = false,
-    isEnemy = false,
     rotation = 0,
-    name,
   }) {
     this.position = position
     this.image = image
@@ -21,10 +19,7 @@ class Sprite {
     this.animate = animate
     this.sprites = sprites
     this.opacity = 1
-    this.health = 100
-    this.isEnemy = isEnemy
     this.rotation = rotation
-    this.name = name
   }
 
   draw() {
@@ -66,6 +61,31 @@ class Sprite {
 }
 
 class Monster extends Sprite {
+  constructor({
+    position,
+    velocity,
+    image,
+    frames = { max: 1, hold: 10 },
+    sprites,
+    animate = false,
+    rotation = 0,
+    isEnemy = false,
+    name,
+  }) {
+    super({
+      position,
+      velocity,
+      image,
+      frames,
+      sprites,
+      animate,
+      rotation,
+    })
+    this.health = 100
+    this.isEnemy = isEnemy
+    this.name = name
+  }
+
   attack({ attack, recipient, rendererSprites }) {
     document.querySelector('#dialogueBox').style.display = 'block'
     document.querySelector(
