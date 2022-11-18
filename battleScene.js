@@ -1,4 +1,3 @@
-
 const battleBackgroundImage = new Image()
 battleBackgroundImage.src = './assets/images/battleBackground.png'
 const battleBackground = new Sprite({
@@ -6,9 +5,8 @@ const battleBackground = new Sprite({
   position: {
     x: 0,
     y: 0,
-  }
+  },
 })
-
 
 const draggle = new Monster(monsters.Draggle)
 const emby = new Monster(monsters.Emby)
@@ -20,7 +18,6 @@ emby.attacks.forEach((attack) => {
   button.innerHTML = attack.name
   document.querySelector('#attacksBox').append(button)
 })
-
 
 function animateBattle() {
   window.requestAnimationFrame(animateBattle)
@@ -43,16 +40,24 @@ buttons.forEach((button) => {
     emby.attack({
       attack: selectedAttack,
       recipient: draggle,
-      rendererSprites
+      rendererSprites,
     })
 
-    const randomAttack = draggle.attacks[Math.floor(Math.random() * draggle.attacks.length)]
+    if (draggle.health <= 0) {
+      queue.push(() => {
+        draggle.faint()
+      })
+    }
+    
+    // draggle or enemy attacks right here
+    const randomAttack =
+      draggle.attacks[Math.floor(Math.random() * draggle.attacks.length)]
 
     queue.push(() => {
       draggle.attack({
         attack: randomAttack,
         recipient: emby,
-        rendererSprites
+        rendererSprites,
       })
     })
   })
