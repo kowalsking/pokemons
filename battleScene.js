@@ -47,8 +47,11 @@ buttons.forEach((button) => {
       queue.push(() => {
         draggle.faint()
       })
+      queue.push(() => {
+        // fade back to black
+      })
     }
-    
+
     // draggle or enemy attacks right here
     const randomAttack =
       draggle.attacks[Math.floor(Math.random() * draggle.attacks.length)]
@@ -59,6 +62,12 @@ buttons.forEach((button) => {
         recipient: emby,
         rendererSprites,
       })
+
+      if (emby.health <= 0) {
+        queue.push(() => {
+          emby.faint()
+        })
+      }
     })
   })
 
