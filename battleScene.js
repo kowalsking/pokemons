@@ -56,6 +56,8 @@ buttons.forEach((button) => {
           onComplete: () => {
             window.cancelAnimationFrame(battleAnimationId)
             animate()
+
+            document.querySelector('#userInterface').style.display = 'none'
             gsap.to('#overlappingDiv', {
               opacity: 0
             })
