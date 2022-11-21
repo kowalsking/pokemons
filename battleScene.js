@@ -19,8 +19,10 @@ emby.attacks.forEach((attack) => {
   document.querySelector('#attacksBox').append(button)
 })
 
+let battleAnimationId
+
 function animateBattle() {
-  window.requestAnimationFrame(animateBattle)
+  battleAnimationId = window.requestAnimationFrame(animateBattle)
   battleBackground.draw()
 
   rendererSprites.forEach((sprite) => {
@@ -49,7 +51,16 @@ buttons.forEach((button) => {
       })
       queue.push(() => {
         // fade back to black
-        
+        gsap.to('#overlappingDiv', {
+          opacity: 1,
+          onComplete: () => {
+            window.cancelAnimationFrame(battleAnimationId)
+            animate()
+            gsap.to('#overlappingDiv', {
+              opacity: 0
+            })
+          }
+        })
       })
     }
 
