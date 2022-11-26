@@ -24,7 +24,7 @@ const test = {
   arr: [],
   add: function (elem) {
     p.prototype.push.call(this.arr, elem)
-  },
+  }
 }
 
 test.add(1)
