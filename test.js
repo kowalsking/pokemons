@@ -1,5 +1,5 @@
 const obj = {
-  a: 1,
+  a: 1
 }
 
 const p = new Proxy(Array, {
