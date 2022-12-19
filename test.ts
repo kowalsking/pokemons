@@ -12,7 +12,7 @@ const p = new Proxy(Array, {
     console.log('set target', target)
     console.log('set property', property)
     console.log('set value', value)
-    target[property] = value
+    return target[property] = value
   },
 })
 
@@ -29,3 +29,14 @@ const test = {
 
 test.add(1)
 // console.log('test', test) // test { length: 0, arr: [ 1 ], add: [Function: add] }
+
+
+abstract class Ameba {
+  hello: number
+  erro: boolean
+}
+
+class Tu implements Ameba {
+  hello: 3
+  erro: false
+}
