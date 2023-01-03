@@ -15,9 +15,14 @@ let battleAnimationId
 let queue
 
 function initBattle() {
+  document.querySelector('#userInterface').style.display = 'block'
+  document.querySelector('#dialogueBox').style.display = 'none'
+  document.querySelector('#enemyHealthBar').style.width = '100%'
+  document.querySelector('#playerHealthBar').style.width = '100%'
+  document.querySelector('#attacksBox').replaceChildren()
+
   draggle = new Monster(monsters.Draggle)
   emby = new Monster(monsters.Emby)
-
   rendererSprites = [draggle, emby]
   queue = []
 
@@ -54,6 +59,8 @@ function initBattle() {
               gsap.to('#overlappingDiv', {
                 opacity: 0,
               })
+
+              battle.initiated = false
             },
           })
         })
@@ -73,6 +80,21 @@ function initBattle() {
         if (emby.health <= 0) {
           queue.push(() => {
             emby.faint()
+          })
+
+          gsap.to('#overlappingDiv', {
+            opacity: 1,
+            onComplete: () => {
+              window.cancelAnimationFrame(battleAnimationId)
+              animate()
+
+              document.querySelector('#userInterface').style.display = 'none'
+              gsap.to('#overlappingDiv', {
+                opacity: 0,
+              })
+
+              battle.initiated = false
+            },
           })
         }
       })
